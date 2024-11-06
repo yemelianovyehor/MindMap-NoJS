@@ -4,6 +4,7 @@ body {
     align-items: flex-start;
     height: 100vh;
     margin: 0;
+    color: #000;
 }
 
 * {
@@ -33,6 +34,13 @@ body {
             transition: all 0.5s;
             -webkit-transition: all 0.5s;
             -moz-transition: all 0.5s;
+
+
+            &:not(:has(ul)) {
+                label {
+                    background-color: lightgreen;
+                }
+            }
 
             &::before,
             &::after {
@@ -86,7 +94,7 @@ body {
                 border: 1px solid #ccc;
                 padding: 5px 10px;
                 text-decoration: none;
-                color: #666;
+                /* color: #666; */
                 font-family: arial, verdana, tahoma;
                 font-size: 11px;
                 display: inline-block;
@@ -99,8 +107,31 @@ body {
             }
 
             a:hover,
-            label:hover,
-            a:hover+ul li a,
+            label:hover {
+                background: #c8e4f8;
+                color: #000;
+                border: 1px solid #94a0b4;
+                transition: all 0.5s;
+                -webkit-transition: all 0.5s;
+                -moz-transition: all 0.5s;
+
+                &+ul {
+                    li:has(ul) {
+                        a,
+                        label {
+                            background: #c8e4f8;
+                            color: #000;
+                            border: 1px solid #94a0b4;
+                            transition: all 0.5s;
+                            -webkit-transition: all 0.5s;
+                            -moz-transition: all 0.5s;
+                        }
+                    }
+                }
+
+            }
+
+            /* a:hover+ul li a,
             a:hover+ul li label,
             label:hover+ul li a,
             label:hover+ul li label {
@@ -110,7 +141,13 @@ body {
                 transition: all 0.5s;
                 -webkit-transition: all 0.5s;
                 -moz-transition: all 0.5s;
-            }
+
+                &:not(:has(ul)) {
+                    label {
+                        background-color: lightgreen;
+                    }
+                }
+            } */
 
             a,
             label:hover+ul::before,
@@ -126,6 +163,7 @@ body {
         ul {
             animation: slideaway 0.5 ease;
             display: none;
+
             &::before {
                 content: '';
                 position: absolute;
@@ -138,7 +176,6 @@ body {
                 -webkit-transition: all 0.5s;
                 -moz-transition: all 0.5s;
             }
-            
         }
     }
 
