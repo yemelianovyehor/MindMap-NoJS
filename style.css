@@ -1,0 +1,181 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    height: 100vh;
+    margin: 0;
+}
+
+* {
+    animation: all 0.5 ease, display 1s ease-in;
+}
+
+.mindmap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    ul {
+        max-height: 0;
+        padding-top: 20px;
+        position: relative;
+        transition: all 0.5s ease-out;
+        -webkit-transition: all 0.5s;
+        -moz-transition: all 0.5s;
+
+        li {
+            float: left;
+            text-align: center;
+            list-style-type: none;
+            position: relative;
+            padding: 20px 5px 0 5px;
+            transition: all 0.5s;
+            -webkit-transition: all 0.5s;
+            -moz-transition: all 0.5s;
+
+            &::before,
+            &::after {
+                content: '';
+                position: absolute;
+                top: 0;
+                right: 50%;
+                border-top: 1px solid #ccc;
+                width: 50%;
+                height: 20px;
+                transition: all 0.5s;
+                -webkit-transition: all 0.5s;
+                -moz-transition: all 0.5s;
+            }
+
+            &::after {
+                right: auto;
+                left: 50%;
+                border-left: 1px solid #ccc;
+            }
+
+            &:only-child::after,
+            &:only-child::before {
+                display: none;
+            }
+
+            &:only-child {
+                padding-top: 0;
+            }
+
+            &:first-child::before,
+            &:last-child::after {
+                border: 0 none;
+            }
+
+            &:last-child::before {
+                border-right: 1px solid #ccc;
+                border-radius: 0 5px 0 0;
+                -webkit-border-radius: 0 5px 0 0;
+                -moz-border-radius: 0 5px 0 0;
+            }
+
+            &:first-child::after {
+                border-radius: 5px 0 0 0;
+                -webkit-border-radius: 5px 0 0 0;
+                -moz-border-radius: 5px 0 0 0;
+            }
+
+            a,
+            label {
+                border: 1px solid #ccc;
+                padding: 5px 10px;
+                text-decoration: none;
+                color: #666;
+                font-family: arial, verdana, tahoma;
+                font-size: 11px;
+                display: inline-block;
+                border-radius: 5px;
+                -webkit-border-radius: 5px;
+                -moz-border-radius: 5px;
+                transition: all 0.5s;
+                -webkit-transition: all 0.5s;
+                -moz-transition: all 0.5s;
+            }
+
+            a:hover,
+            label:hover,
+            a:hover+ul li a,
+            a:hover+ul li label,
+            label:hover+ul li a,
+            label:hover+ul li label {
+                background: #c8e4f8;
+                color: #000;
+                border: 1px solid #94a0b4;
+                transition: all 0.5s;
+                -webkit-transition: all 0.5s;
+                -moz-transition: all 0.5s;
+            }
+
+            a,
+            label:hover+ul::before,
+            a,
+            label:hover+ul ul::before {
+                border-color: #94a0b4;
+                transition: all 0.5s;
+                -webkit-transition: all 0.5s;
+                -moz-transition: all 0.5s;
+            }
+        }
+
+        ul {
+            animation: slideaway 0.5 ease;
+            display: none;
+            &::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 50%;
+                border-left: 1px solid #ccc;
+                width: 0;
+                height: 20px;
+                transition: all 0.5s;
+                -webkit-transition: all 0.5s;
+                -moz-transition: all 0.5s;
+            }
+            
+        }
+    }
+
+    input[type="checkbox"] {
+        display: none;
+
+        &:checked~ul {
+            /* transition: opacity 0.5s, display 0s; */
+            animation: slidein 0.5s ease forwards;
+            display: block;
+        }
+    }
+}
+
+.mindmap ul ul {
+    transition: opacity 0.5s, display 0s 0.5s;
+    animation: slideaway 0.5s ease forwards;
+}
+
+@keyframes slideaway {
+    from {
+        display: block;
+    }
+
+    to {
+        transform: translateY(40px);
+        opacity: 0;
+    }
+}
+
+@keyframes slidein {
+    from {
+        transform: translateY(-40px);
+        opacity: 0;
+        display: none;
+    }
+
+    to {
+        display: block
+    }
+}
